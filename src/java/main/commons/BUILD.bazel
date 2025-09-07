@@ -1,0 +1,33 @@
+load("@aspect_bazel_lib//lib:tar.bzl", "tar")
+load("@container_structure_test//:defs.bzl", "container_structure_test")
+load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_plugin")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push")
+
+package(default_visibility = ["//visibility:public"])
+
+java_plugin(
+    name = "lombok_plugin",
+    processor_class = "lombok.launch.AnnotationProcessorHider$AnnotationProcessor",
+    deps = [
+        "@maven//:org_projectlombok_lombok",
+    ],
+)
+
+java_library(
+    name = "commons_library",
+    srcs = glob(["**/*.java"]),
+    javacopts = [
+        "-source",
+        "21",
+        "-target",
+        "21",
+    ],
+    plugins = [":lombok_plugin"],
+    deps = [
+        "@maven//:io_projectreactor_reactor_core",
+        "@maven//:org_bouncycastle_bcpg_jdk18on",
+        "@maven//:org_bouncycastle_bcpkix_jdk18on",
+        "@maven//:org_bouncycastle_bcprov_jdk18on",
+        "@maven//:org_projectlombok_lombok",
+    ],
+)

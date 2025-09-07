@@ -1,0 +1,74 @@
+module(
+    name = "demo",
+    version = "0.0.0",
+)
+
+bazel_dep(name = "rules_oci", version = "2.2.6")
+bazel_dep(name = "rules_java", version = "8.15.2")
+bazel_dep(name = "rules_jvm_external", version = "6.8")
+bazel_dep(name = "contrib_rules_jvm", version = "0.29.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.21.1")
+bazel_dep(name = "container_structure_test", version = "1.19.1")
+
+# --- maven
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    name = "maven",
+    artifacts = [
+        # spring
+        "org.springframework.boot:spring-boot-starter-web:3.5.5",
+        "org.springframework.boot:spring-boot-starter-test:3.5.5",
+        "org.springframework.boot:spring-boot-autoconfigure:3.5.5",
+        "org.springframework.boot:spring-boot-starter-graphql:3.5.5",
+        "org.springframework.boot:spring-boot-starter-data-jpa:3.5.5",
+        "org.springframework.boot:spring-boot-configuration-processor:3.5.5",
+
+        # flyway
+        "org.flywaydb:flyway-core:11.7.2",
+        "org.flywaydb:flyway-mysql:11.7.2",
+
+        # mysql connector
+        "com.mysql:mysql-connector-j:jar:9.4.0",
+
+        # agroal pool
+        "io.agroal:agroal-spring-boot-starter:2.8",
+
+        # graphql scalars
+        "com.graphql-java:graphql-java-extended-scalars:24.0",
+
+        # bouncy castle
+        "org.bouncycastle:bcpg-jdk18on:1.81",
+        "org.bouncycastle:bcprov-jdk18on:1.81",
+        "org.bouncycastle:bcpkix-jdk18on:1.81",
+
+        # reactor
+        "io.projectreactor:reactor-core:3.7.9",
+        "io.projectreactor:reactor-test:3.7.9",
+
+        # junit 5
+        "org.junit.jupiter:junit-jupiter-api:5.12.2",
+        "org.junit.jupiter:junit-jupiter-engine:5.12.2",
+        "org.junit.platform:junit-platform-reporting:1.12.2",
+        "org.junit.platform:junit-platform-console-standalone:1.12.2",
+
+        # lombok
+        "org.projectlombok:lombok:1.18.34",
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+    ],
+)
+use_repo(maven, "maven")
+
+# --- oci
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+oci.pull(
+    name = "java_base",
+    digest = "sha256:f72ccbc829d530927f981a78434b481f4c953c8f7ad9ac2ecf400cb392f79e98",
+    image = "gcr.io/distroless/java21-debian12",
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+    ],
+)
+use_repo(oci, "java_base", "java_base_linux_amd64", "java_base_linux_arm64")

@@ -1,0 +1,1 @@
+Sketching out an Offline licensing mechanism for Air-Gapped environments.

@@ -1,0 +1,40 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    licenses:[DtoLicense!]!
+}
+
+type Mutation {
+    deleteLicense(id:String!):DtoLicense!
+    createLicense(payload:DtoCreateLicensePayload!):DtoLicense!
+}
+
+input DtoCreateLicensePayload {
+    token:String!
+    customer:String!
+    expiry:DateTime!
+    cpuQuota:Int!
+    memoryQuota:Int!
+}
+
+type DtoLicense {
+    id:String!
+    specs:DtoSpecs!
+    specsSignature:String!
+}
+
+type DtoSpecs {
+    token:String!
+    customer:String!
+    expiry:DateTime!
+    quota:DtoQuota!
+}
+type DtoQuota {
+    cpu:Int!
+    memory:Int!
+}
+
+scalar DateTime

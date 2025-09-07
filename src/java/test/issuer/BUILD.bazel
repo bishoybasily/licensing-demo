@@ -1,0 +1,23 @@
+load("@contrib_rules_jvm//docs:stardoc-input.bzl", "java_test_suite")
+
+java_test_suite(
+    name = "tests",
+    srcs = glob(["**/*.java"]),
+    resource_strip_prefix = "src/java/test/issuer/resources",
+    resources = glob(["resources/**"]),
+    runner = "junit5",
+    runtime_deps = [
+        "@maven//:org_junit_jupiter_junit_jupiter_engine",
+        "@maven//:org_junit_platform_junit_platform_launcher",
+        "@maven//:org_junit_platform_junit_platform_reporting",
+        "@maven//:org_yaml_snakeyaml",
+    ],
+    deps = [
+        "//src/java/main/commons:commons_library",
+        "//src/java/main/issuer:issuer_binary",
+        "@maven//:org_junit_jupiter_junit_jupiter_api",
+        "@maven//:org_springframework_boot_spring_boot_test",
+        "@maven//:org_springframework_spring_beans",
+        "@maven//:org_springframework_spring_test",
+    ],
+)

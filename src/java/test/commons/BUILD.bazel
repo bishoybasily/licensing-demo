@@ -1,0 +1,16 @@
+load("@contrib_rules_jvm//docs:stardoc-input.bzl", "java_test_suite")
+
+java_test_suite(
+    name = "tests",
+    srcs = glob(["**/*.java"]),
+    runner = "junit5",
+    runtime_deps = [
+        "@maven//:org_junit_jupiter_junit_jupiter_engine",
+        "@maven//:org_junit_platform_junit_platform_launcher",
+        "@maven//:org_junit_platform_junit_platform_reporting",
+    ],
+    deps = [
+        "//src/java/main/commons:commons_library",
+        "@maven//:org_junit_jupiter_junit_jupiter_api",
+    ],
+)

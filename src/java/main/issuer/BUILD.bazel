@@ -1,0 +1,76 @@
+load("@aspect_bazel_lib//lib:tar.bzl", "tar")
+load("@container_structure_test//:defs.bzl", "container_structure_test")
+load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_plugin")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push")
+
+package(default_visibility = ["//visibility:public"])
+
+java_plugin(
+    name = "lombok_plugin",
+    processor_class = "lombok.launch.AnnotationProcessorHider$AnnotationProcessor",
+    deps = [
+        "@maven//:org_projectlombok_lombok",
+    ],
+)
+
+java_binary(
+    name = "issuer_binary",
+    srcs = glob(["**/*.java"]),
+    classpath_resources = glob(["resources/**"]),
+    javacopts = [
+        "-source",
+        "21",
+        "-target",
+        "21",
+    ],
+    main_class = "com.gmail.bishoybasily.licensing.issuer.Main",
+    plugins = [":lombok_plugin"],
+    deps = [
+        "//src/java/main/commons:commons_library",
+        "@maven//:com_graphql_java_graphql_java_extended_scalars",
+        "@maven//:io_projectreactor_reactor_core",
+        "@maven//:jakarta_annotation_jakarta_annotation_api",
+        "@maven//:jakarta_persistence_jakarta_persistence_api",
+        "@maven//:org_bouncycastle_bcpg_jdk18on",
+        "@maven//:org_bouncycastle_bcpkix_jdk18on",
+        "@maven//:org_bouncycastle_bcprov_jdk18on",
+        "@maven//:org_hibernate_orm_hibernate_core",
+        "@maven//:org_projectlombok_lombok",
+        "@maven//:org_springframework_boot_spring_boot",
+        "@maven//:org_springframework_boot_spring_boot_autoconfigure",
+        "@maven//:org_springframework_boot_spring_boot_starter_data_jpa",
+        "@maven//:org_springframework_boot_spring_boot_starter_graphql",
+        "@maven//:org_springframework_boot_spring_boot_starter_web",
+        "@maven//:org_springframework_data_spring_data_jpa",
+        "@maven//:org_springframework_graphql_spring_graphql",
+        "@maven//:org_springframework_spring_context",
+        "@maven//:org_springframework_spring_core",
+        "@maven//:org_springframework_spring_web",
+    ],
+)
+
+tar(
+    name = "layer",
+    srcs = ["issuer_binary_deploy.jar"],
+)
+
+oci_image(
+    name = "issuer_binary_image",
+    base = "@java_base",
+    entrypoint = [
+        "java",
+        "-jar",
+        "/java-maven-deploy.jar",
+    ],
+    tars = [":layer"],
+)
+
+oci_push(
+    name = "issuer_binary_image_push",
+    image = ":issuer_binary_image",
+    remote_tags = [
+        "latest",
+        "1.0.0",
+    ],
+    repository = "ghcr.io/bishoybasily/licensing-demo-issuer",
+)
