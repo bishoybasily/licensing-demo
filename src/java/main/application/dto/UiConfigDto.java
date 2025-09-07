@@ -9,5 +9,4 @@ public class UiConfigDto {
 
     private String name;
 
-
 }

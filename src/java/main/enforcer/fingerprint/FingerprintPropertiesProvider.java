@@ -1,14 +1,9 @@
 package com.gmail.bishoybasily.licensing.enforcer.fingerprint;
 
-import java.util.Map;
+import java.util.List;
 
 public interface FingerprintPropertiesProvider {
 
-    Map<String, String> properties();
-
-//    String serviceAccountIssuer();
-//    String kubeSystemNamespaceId();
-//    String installationNamespaceName();
-//    String apiServerCertificateFingerprint();
+    List<Object> properties();
 
 }
