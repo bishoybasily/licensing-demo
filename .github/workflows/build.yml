@@ -39,5 +39,5 @@ jobs:
 
       - run: bazel build //...
       - run: bazel test //... --test_output=all
-      - run: bazel run //src/java/main/application:issuer_binary_image_push
+      - run: bazel run //src/java/main/issuer:issuer_binary_image_push
       - run: bazel run //src/java/main/application:application_binary_image_push
