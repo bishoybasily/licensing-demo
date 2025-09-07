@@ -1,5 +1,6 @@
 package com.gmail.bishoybasily.licensing.issuer.model.service;
 
+import com.gmail.bishoybasily.licensing.issuer.config.concurrency.SchedulersProvider;
 import com.gmail.bishoybasily.licensing.issuer.config.licensing.LicensingTemplate;
 import com.gmail.bishoybasily.licensing.issuer.model.dto.DtoCreateLicensePayload;
 import com.gmail.bishoybasily.licensing.issuer.model.entity.EntityLicense;
@@ -8,32 +9,28 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
-import reactor.core.scheduler.Schedulers;
 
-import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
 public class ServiceLicenses {
 
-    private static final Scheduler SCHEDULER = Schedulers.fromExecutor(Executors.newVirtualThreadPerTaskExecutor());
-
     private final LicensingTemplate licensingTemplate;
     private final RepositoryLicenses repositoryLicenses;
+    private final SchedulersProvider schedulersProvider;
 
     public Flux<EntityLicense> list() {
         return Mono.fromCallable(repositoryLicenses::findAll)
                 .flatMapIterable(Function.identity())
-                .subscribeOn(SCHEDULER);
+                .subscribeOn(schedulersProvider.subscribeOn());
     }
 
     public Mono<EntityLicense> create(DtoCreateLicensePayload dto) {
         return Mono.fromCallable(() -> {
 
                     final var specs = new EntityLicense.Specs()
-                            .setToken(dto.getToken())
+                            .setFingerprint(dto.getFingerprint())
                             .setCustomer(dto.getCustomer())
                             .setExpiry(dto.getExpiry())
                             .setQuota(
@@ -50,7 +47,7 @@ public class ServiceLicenses {
 
                     return repositoryLicenses.save(entityLicense);
                 })
-                .subscribeOn(SCHEDULER);
+                .subscribeOn(schedulersProvider.subscribeOn());
     }
 
     public Mono<EntityLicense> delete(String id) {
@@ -60,7 +57,7 @@ public class ServiceLicenses {
                         return entity;
                     }).orElseThrow();
                 })
-                .subscribeOn(SCHEDULER);
+                .subscribeOn(schedulersProvider.subscribeOn());
     }
 
 

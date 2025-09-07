@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 
 @Data
@@ -35,7 +36,7 @@ public class EntityLicense {
     @Accessors(chain = true)
     public static class Specs {
 
-        private String token;
+        private String fingerprint;
         private String customer;
         private OffsetDateTime expiry;
         @Embedded

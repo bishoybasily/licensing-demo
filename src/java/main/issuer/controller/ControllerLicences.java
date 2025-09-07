@@ -30,7 +30,7 @@ public class ControllerLicences {
                 .withId(entity.getId())
                 .withSpecs(
                         DtoSpecs.builder()
-                                .withToken(specs.getToken())
+                                .withFingerprint(specs.getFingerprint())
                                 .withExpiry(specs.getExpiry())
                                 .withCustomer(specs.getCustomer())
                                 .withQuota(
@@ -54,15 +54,7 @@ public class ControllerLicences {
 
     @SchemaMapping(typeName = "Mutation", field = "createLicense")
     public Mono<DtoLicense> createLicence(@Argument @Nonnull DtoCreateLicensePayload payload) {
-
-        final var dtoCreateLicense = DtoCreateLicensePayload.builder()
-                .withCpuQuota(payload.getCpuQuota())
-                .withMemoryQuota(payload.getMemoryQuota())
-                .withCustomer(payload.getCustomer())
-                .withExpiry(payload.getExpiry())
-                .build();
-
-        return serviceLicenses.create(dtoCreateLicense).map(entityToDto);
+        return serviceLicenses.create(payload).map(entityToDto);
     }
 
     @SchemaMapping(typeName = "Mutation", field = "deleteLicense")

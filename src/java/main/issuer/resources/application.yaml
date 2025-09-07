@@ -41,6 +41,5 @@ spring:
     #    type: com.zaxxer.hikari.HikariDataSource
     type: io.agroal.springframework.boot.AgroalDataSource
 
-
 licensing:
   private-key-path: "${PRIVATE_KEY_PATH:keys/private.pem}"

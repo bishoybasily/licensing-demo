@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @Builder(toBuilder = true, setterPrefix = "with")
 public class DtoSpecs {
 
-    private String token;
+    private String fingerprint;
     private String customer;
     private OffsetDateTime expiry;
     private DtoQuota quota;
