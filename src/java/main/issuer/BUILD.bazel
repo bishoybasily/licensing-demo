@@ -16,7 +16,6 @@ java_plugin(
 java_binary(
     name = "issuer_binary",
     srcs = glob(["**/*.java"]),
-    classpath_resources = glob(["resources/**"]),
     javacopts = [
         "-source",
         "21",
@@ -25,6 +24,8 @@ java_binary(
     ],
     main_class = "com.gmail.bishoybasily.licensing.issuer.Main",
     plugins = [":lombok_plugin"],
+    resource_strip_prefix = "src/java/main/issuer/resources",
+    resources = glob(["resources/**"]),
     deps = [
         "//src/java/main/commons:commons_library",
 
@@ -52,6 +53,8 @@ java_binary(
         "@maven//:org_bouncycastle_bcpg_jdk18on",
         "@maven//:org_bouncycastle_bcpkix_jdk18on",
         "@maven//:org_bouncycastle_bcprov_jdk18on",
+
+        # hibernate
         "@maven//:org_hibernate_orm_hibernate_core",
 
         # lomobok
@@ -62,7 +65,7 @@ java_binary(
         "@maven//:org_springframework_boot_spring_boot_autoconfigure",
         "@maven//:org_springframework_boot_spring_boot_starter_data_jpa",
         "@maven//:org_springframework_boot_spring_boot_starter_graphql",
-        "@maven//:org_springframework_boot_spring_boot_starter_web",
+        "@maven//:org_springframework_boot_spring_boot_starter_webflux",
         "@maven//:org_springframework_data_spring_data_jpa",
         "@maven//:org_springframework_graphql_spring_graphql",
         "@maven//:org_springframework_spring_context",

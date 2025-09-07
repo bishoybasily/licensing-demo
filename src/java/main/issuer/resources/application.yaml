@@ -9,6 +9,7 @@ spring:
     schema:
       printer:
         enabled: true
+      locations: "classpath:graphql/**/"
     http:
       path: /graphql
 

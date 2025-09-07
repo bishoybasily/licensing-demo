@@ -17,7 +17,7 @@ maven.install(
     artifacts = [
 
         # spring
-        "org.springframework.boot:spring-boot-starter-web:3.5.5",
+        "org.springframework.boot:spring-boot-starter-webflux:3.5.5",
         "org.springframework.boot:spring-boot-starter-test:3.5.5",
         "org.springframework.boot:spring-boot-autoconfigure:3.5.5",
         "org.springframework.boot:spring-boot-starter-graphql:3.5.5",
