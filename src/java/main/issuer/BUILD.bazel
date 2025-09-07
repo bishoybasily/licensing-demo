@@ -27,15 +27,37 @@ java_binary(
     plugins = [":lombok_plugin"],
     deps = [
         "//src/java/main/commons:commons_library",
+
+        # graphql
         "@maven//:com_graphql_java_graphql_java_extended_scalars",
+
+        # flyway
+        "@maven//:org_flywaydb_flyway_core",
+        "@maven//:org_flywaydb_flyway_mysql",
+
+        # jdbc driver
+        "@maven//:com_mysql_mysql_connector_j",
+
+        # jdbc pool
+        "@maven//:io_agroal_agroal_spring_boot_starter",
+
+        # reactor
         "@maven//:io_projectreactor_reactor_core",
+
+        # jakarta
         "@maven//:jakarta_annotation_jakarta_annotation_api",
         "@maven//:jakarta_persistence_jakarta_persistence_api",
+
+        # bouncy castle
         "@maven//:org_bouncycastle_bcpg_jdk18on",
         "@maven//:org_bouncycastle_bcpkix_jdk18on",
         "@maven//:org_bouncycastle_bcprov_jdk18on",
         "@maven//:org_hibernate_orm_hibernate_core",
+
+        # lomobok
         "@maven//:org_projectlombok_lombok",
+
+        # spring
         "@maven//:org_springframework_boot_spring_boot",
         "@maven//:org_springframework_boot_spring_boot_autoconfigure",
         "@maven//:org_springframework_boot_spring_boot_starter_data_jpa",

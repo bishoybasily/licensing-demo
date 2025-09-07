@@ -15,6 +15,7 @@ maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     name = "maven",
     artifacts = [
+
         # spring
         "org.springframework.boot:spring-boot-starter-web:3.5.5",
         "org.springframework.boot:spring-boot-starter-test:3.5.5",
@@ -27,10 +28,10 @@ maven.install(
         "org.flywaydb:flyway-core:11.7.2",
         "org.flywaydb:flyway-mysql:11.7.2",
 
-        # mysql connector
+        # jdbc connector
         "com.mysql:mysql-connector-j:jar:9.4.0",
 
-        # agroal pool
+        # jdbc pool
         "io.agroal:agroal-spring-boot-starter:2.8",
 
         # graphql scalars
