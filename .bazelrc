@@ -1,1 +1,2 @@
---spawn_strategy=standalone
+run --spawn_strategy=standalone
+build --nojava_header_compilation
