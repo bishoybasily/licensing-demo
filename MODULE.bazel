@@ -9,6 +9,9 @@ bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "contrib_rules_jvm", version = "0.29.0")
 bazel_dep(name = "aspect_bazel_lib", version = "2.21.1")
 bazel_dep(name = "container_structure_test", version = "1.19.1")
+bazel_dep(name = "googleapis", version = "0.0.0-20250826-a92cee39")
+bazel_dep(name = "protoc-gen-validate", version = "1.2.1.bcr.1")
+bazel_dep(name = "googleapis-java", version = "1.0.0")
 
 # --- maven
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
@@ -18,10 +21,6 @@ maven.install(
 
         # gcp
         "com.google.cloud:google-cloud-kms",
-
-        # protobuf
-        "com.google.protobuf:protobuf-java",
-        "com.google.protobuf:protobuf-java-util",
 
         # kubernetes client
         "io.kubernetes:client-java:24.0.0",
@@ -68,11 +67,11 @@ maven.install(
         "org.junit.platform:junit-platform-console-standalone:1.13.4",
     ],
     boms = [
-        # grpc
-        "io.grpc:grpc-bom:1.75.0",
-
-        # protobuf
-        "com.google.protobuf:protobuf-bom:4.32.0",
+        #         # grpc
+        #         "io.grpc:grpc-bom:1.66.0",
+        #
+        #         # protobuf
+        #         "com.google.protobuf:protobuf-bom:4.32.0",
 
         # junit 5
         "org.junit:junit-bom:5.13.4",

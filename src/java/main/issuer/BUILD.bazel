@@ -29,8 +29,8 @@ java_binary(
     deps = [
         "//src/java/main/commons:commons_library",
 
-        #         # google sdk
-        #         "@maven//:com_google_cloud_google_cloud_kms",
+        # google sdk
+        "@maven//:com_google_cloud_google_cloud_kms",
 
         # graphql
         "@maven//:com_graphql_java_graphql_java_extended_scalars",
