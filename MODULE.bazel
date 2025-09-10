@@ -16,13 +16,22 @@ maven.install(
     name = "maven",
     artifacts = [
 
+        # kubernetes client
+        "io.kubernetes:client-java:24.0.0",
+
+        # protobuf
+        "com.google.protobuf:protobuf-java",
+
+        # lombok
+        "org.projectlombok:lombok",
+
         # spring
-        "org.springframework.boot:spring-boot-starter-webflux:3.5.5",
-        "org.springframework.boot:spring-boot-starter-test:3.5.5",
-        "org.springframework.boot:spring-boot-autoconfigure:3.5.5",
-        "org.springframework.boot:spring-boot-starter-graphql:3.5.5",
-        "org.springframework.boot:spring-boot-starter-data-jpa:3.5.5",
-        "org.springframework.boot:spring-boot-configuration-processor:3.5.5",
+        "org.springframework.boot:spring-boot-starter-webflux",
+        "org.springframework.boot:spring-boot-starter-test",
+        "org.springframework.boot:spring-boot-autoconfigure",
+        "org.springframework.boot:spring-boot-starter-graphql",
+        "org.springframework.boot:spring-boot-starter-data-jpa",
+        "org.springframework.boot:spring-boot-configuration-processor",
 
         # flyway
         "org.flywaydb:flyway-core:11.7.2",
@@ -43,17 +52,23 @@ maven.install(
         "org.bouncycastle:bcpkix-jdk18on:1.81",
 
         # reactor
-        "io.projectreactor:reactor-core:3.7.9",
-        "io.projectreactor:reactor-test:3.7.9",
+        "io.projectreactor:reactor-core",
+        "io.projectreactor:reactor-test",
 
-        # junit 5
-        "org.junit.jupiter:junit-jupiter-api:5.12.2",
-        "org.junit.jupiter:junit-jupiter-engine:5.12.2",
-        "org.junit.platform:junit-platform-reporting:1.12.2",
-        "org.junit.platform:junit-platform-console-standalone:1.12.2",
+        # junit 5 engine
+        "org.junit.jupiter:junit-jupiter-api",
+        "org.junit.jupiter:junit-jupiter-engine",
 
-        # lombok
-        "org.projectlombok:lombok:1.18.34",
+        # junit 5 platform
+        "org.junit.platform:junit-platform-reporting:1.13.4",
+        "org.junit.platform:junit-platform-console-standalone:1.13.4",
+    ],
+    boms = [
+        "io.grpc:grpc-bom:1.75.0",
+        "org.junit:junit-bom:5.13.4",
+        "com.google.protobuf:protobuf-bom:4.32.0",
+        "com.fasterxml.jackson:jackson-bom:2.20.0",
+        "org.springframework.boot:spring-boot-dependencies:3.5.5",
     ],
     repositories = [
         "https://repo1.maven.org/maven2",

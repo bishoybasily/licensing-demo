@@ -24,10 +24,23 @@ java_library(
     ],
     plugins = [":lombok_plugin"],
     deps = [
+
+        # kubernetes client
+        "@maven//:io_kubernetes_client_java",
+        "@maven//:io_kubernetes_client_java_api",
+
+        # reactor
         "@maven//:io_projectreactor_reactor_core",
+
+        # bouncy castle
         "@maven//:org_bouncycastle_bcpg_jdk18on",
         "@maven//:org_bouncycastle_bcpkix_jdk18on",
         "@maven//:org_bouncycastle_bcprov_jdk18on",
+
+        # lomobk
         "@maven//:org_projectlombok_lombok",
+
+        # slf4j
+        "@maven//:org_slf4j_slf4j_api",
     ],
 )

@@ -13,13 +13,18 @@ public class LicensingConfig {
 
     @Bean
     FingerprintPropertiesProvider fingerprintPropertiesProvider() {
-        return () -> {
-            // list of unique and stable values, suggestions:
-            //    String serviceAccountIssuer();
-            //    String kubeSystemNamespaceId();
-            //    String installationNamespaceName();
-            //    String apiServerCertificateFingerprint();
-            return List.of("val1", "val2");
+        return new FingerprintPropertiesProvider() {
+            @Override
+            public List<Object> properties() {
+
+
+                // list of unique and stable values, suggestions:
+                //    String serviceAccountIssuer();
+                //    String kubeSystemNamespaceId();
+                //    String installationNamespaceName();
+                //    String apiServerCertificateFingerprint();
+                return List.of("val1", "val2");
+            }
         };
     }
 

@@ -27,9 +27,20 @@ java_binary(
     resource_strip_prefix = "src/java/main/application/resources",
     resources = glob(["resources/**"]),
     deps = [
+        "//src/java/main/commons:commons_library",
         "//src/java/main/enforcer:enforcer_library",
+
+        # kubernetes client
+        "@maven//:io_kubernetes_client_java",
+        "@maven//:io_kubernetes_client_java_api",
+
+        # reactor
         "@maven//:io_projectreactor_reactor_core",
+
+        # lombok
         "@maven//:org_projectlombok_lombok",
+
+        # spring
         "@maven//:org_springframework_boot_spring_boot",
         "@maven//:org_springframework_boot_spring_boot_autoconfigure",
         "@maven//:org_springframework_boot_spring_boot_starter_webflux",
