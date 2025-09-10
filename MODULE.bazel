@@ -16,11 +16,15 @@ maven.install(
     name = "maven",
     artifacts = [
 
-        # kubernetes client
-        "io.kubernetes:client-java:24.0.0",
+        # gcp
+        "com.google.cloud:google-cloud-kms",
 
         # protobuf
         "com.google.protobuf:protobuf-java",
+        "com.google.protobuf:protobuf-java-util",
+
+        # kubernetes client
+        "io.kubernetes:client-java:24.0.0",
 
         # lombok
         "org.projectlombok:lombok",
@@ -64,10 +68,27 @@ maven.install(
         "org.junit.platform:junit-platform-console-standalone:1.13.4",
     ],
     boms = [
+        # grpc
         "io.grpc:grpc-bom:1.75.0",
-        "org.junit:junit-bom:5.13.4",
+
+        # protobuf
         "com.google.protobuf:protobuf-bom:4.32.0",
+
+        # junit 5
+        "org.junit:junit-bom:5.13.4",
+
+        # jackson
         "com.fasterxml.jackson:jackson-bom:2.20.0",
+
+        # google sdk
+        "com.google.cloud:libraries-bom:26.66.0",
+        "com.google.cloud:spring-cloud-gcp-dependencies:7.3.0",
+
+        # aws sdk
+        "software.amazon.awssdk:bom:2.33.5",
+        "io.awspring.cloud:spring-cloud-aws-dependencies:3.4.0",
+
+        # spring
         "org.springframework.boot:spring-boot-dependencies:3.5.5",
     ],
     repositories = [
