@@ -21,13 +21,13 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class ControllerLicences {
 
-    private final Function<EntityLicense, DtoLicense> entityToDto = entity -> {
+    private final Function<EntityLicense, DtoLicense> entityToDto = entityLicense -> {
 
-        final var specs = entity.getSpecs();
+        final var specs = entityLicense.getSpecs();
         final var quota = specs.getQuota();
 
         return DtoLicense.builder()
-                .withId(entity.getId())
+                .withId(entityLicense.getId())
                 .withSpecs(
                         DtoSpecs.builder()
                                 .withFingerprint(specs.getFingerprint())
@@ -41,7 +41,7 @@ public class ControllerLicences {
                                 )
                                 .build()
                 )
-                .withSpecsSignature(entity.getSpecsSignature())
+                .withSpecsSignature(entityLicense.getSpecsSignature())
                 .build();
     };
 

@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.licensing.application.dto;
+package com.gmail.bishoybasily.licensing.application.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

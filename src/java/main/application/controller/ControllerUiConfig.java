@@ -1,6 +1,6 @@
 package com.gmail.bishoybasily.licensing.application.controller;
 
-import com.gmail.bishoybasily.licensing.application.dto.UiConfigDto;
+import com.gmail.bishoybasily.licensing.application.model.dto.UiConfigDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

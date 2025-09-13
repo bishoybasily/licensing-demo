@@ -9,4 +9,5 @@ public class LicenseValidationFailureAnalyzer extends AbstractFailureAnalyzer<Li
     protected FailureAnalysis analyze(Throwable rootFailure, LicenseValidationException cause) {
         return new FailureAnalysis(cause.getMessage(), "Couldn't verify the license, Please contact us to get a License", cause);
     }
+
 }

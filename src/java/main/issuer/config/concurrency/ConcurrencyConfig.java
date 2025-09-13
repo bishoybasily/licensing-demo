@@ -18,4 +18,5 @@ public class ConcurrencyConfig {
     SchedulersProvider schedulersProvider(Executor executor) {
         return SchedulersProvider.of(executor);
     }
+
 }

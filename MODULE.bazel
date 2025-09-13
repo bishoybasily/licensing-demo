@@ -67,11 +67,11 @@ maven.install(
         "org.junit.platform:junit-platform-console-standalone:1.13.4",
     ],
     boms = [
-        #         # grpc
-        #         "io.grpc:grpc-bom:1.66.0",
-        #
-        #         # protobuf
-        #         "com.google.protobuf:protobuf-bom:4.32.0",
+        # grpc
+        "io.grpc:grpc-bom:1.66.0",
+
+        # protobuf
+        "com.google.protobuf:protobuf-bom:4.32.0",
 
         # junit 5
         "org.junit:junit-bom:5.13.4",

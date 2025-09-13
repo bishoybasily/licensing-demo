@@ -46,18 +46,9 @@ jobs:
           path: |
             ~/.cache/bazel
             ~/.cache/bazel-disk
-            ~/.cache/bazel-repo
           key: bazel-${{ runner.os }}-${{ hashFiles('MODULE.bazel', '**/BUILD.bazel', 'WORKSPACE.bazel') }}
           restore-keys: |
             bazel-${{ runner.os }}-
-
-      - name: Maven cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/bazel/_bazel_${{ github.actor }}/**/external/maven
-          key: maven-${{ runner.os }}-${{ hashFiles('MODULE.bazel') }}
-          restore-keys: |
-            maven-${{ runner.os }}-
 
       - name: Test targets
         run: bazel test //... --test_output=all

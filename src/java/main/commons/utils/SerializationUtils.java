@@ -73,8 +73,8 @@ public class SerializationUtils {
             try {
                 field.setAccessible(true);
             } catch (Exception ignored) {
-
             }
+
             try {
                 Object value = field.get(obj);
                 parts.add(field.getName() + "=" + generateCanonicalString(value));
