@@ -7,9 +7,7 @@ import java.util.concurrent.Executor;
 
 public interface SchedulersProvider {
 
-    Scheduler subscribeOn();
-
-   static SchedulersProvider of(Executor executor){
+    static SchedulersProvider of(Executor executor) {
         return new SchedulersProvider() {
             @Override
             public Scheduler subscribeOn() {
@@ -18,5 +16,7 @@ public interface SchedulersProvider {
 
         };
     }
+
+    Scheduler subscribeOn();
 
 }

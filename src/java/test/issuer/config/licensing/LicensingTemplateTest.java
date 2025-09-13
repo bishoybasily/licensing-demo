@@ -33,13 +33,13 @@ public class LicensingTemplateTest {
     void signatureMatchesObject() throws Exception {
 
         class OriginalObj {
-            String field1 = "value1";
-            String field2 = "value2";
+            final String field1 = "value1";
+            final String field2 = "value2";
         }
 
         class SimilarObj {
-            String field1 = "value1";
-            String field2 = "value2";
+            final String field1 = "value1";
+            final String field2 = "value2";
         }
 
         final var orgSign = template.generateEncodedSignature(new OriginalObj());

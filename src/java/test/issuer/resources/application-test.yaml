@@ -1,3 +1,2 @@
-
 licensing:
   private-key-path: "${PRIVATE_KEY_PATH:keys/private.pem}"

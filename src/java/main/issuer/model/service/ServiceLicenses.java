@@ -30,36 +30,36 @@ public class ServiceLicenses {
     public Mono<EntityLicense> create(DtoCreateLicensePayload dto) {
         return fromCallable(() -> {
 
-                    final var specs = new EntityLicense.Specs()
-                            .setFingerprint(dto.getFingerprint())
-                            .setCustomer(dto.getCustomer())
-                            .setExpiry(dto.getExpiry())
-                            .setQuota(
-                                    new EntityLicense.Specs.Quota()
-                                            .setCpu(dto.getCpuQuota())
-                                            .setMemory(dto.getMemoryQuota())
-                            );
+            final var specs = new EntityLicense.Specs()
+                    .setFingerprint(dto.getFingerprint())
+                    .setCustomer(dto.getCustomer())
+                    .setExpiry(dto.getExpiry())
+                    .setQuota(
+                            new EntityLicense.Specs.Quota()
+                                    .setCpu(dto.getCpuQuota())
+                                    .setMemory(dto.getMemoryQuota())
+                    );
 
-                    final var specsSignature = licensingTemplate.generateEncodedSignature(specs);
+            final var specsSignature = licensingTemplate.generateEncodedSignature(specs);
 
-                    final var entityLicense = new EntityLicense()
-                            .setSpecs(specs)
-                            .setSpecsSignature(specsSignature);
+            final var entityLicense = new EntityLicense()
+                    .setSpecs(specs)
+                    .setSpecsSignature(specsSignature);
 
-                    return repositoryLicenses.save(entityLicense);
-                })
+            return repositoryLicenses.save(entityLicense);
+        })
                 .subscribeOn(schedulersProvider.subscribeOn());
     }
 
     public Mono<EntityLicense> delete(String id) {
         return fromCallable(() -> {
-                    return repositoryLicenses.findById(id)
-                            .map(entity -> {
-                                repositoryLicenses.delete(entity);
-                                return entity;
-                            })
-                            .orElseThrow();
-                })
+            return repositoryLicenses.findById(id)
+                    .map(entity -> {
+                        repositoryLicenses.delete(entity);
+                        return entity;
+                    })
+                    .orElseThrow();
+        })
                 .subscribeOn(schedulersProvider.subscribeOn());
     }
 
