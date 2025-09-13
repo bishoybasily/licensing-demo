@@ -1,6 +1,5 @@
 package com.gmail.bishoybasily.licensing.application;
 
-import com.gmail.bishoybasily.licensing.commons.utils.KubernetesUtils;
 import com.gmail.bishoybasily.licensing.enforcer.config.LicensingEnforcerProps;
 import io.kubernetes.client.openapi.apis.CoreApi;
 import org.springframework.boot.CommandLineRunner;
@@ -18,9 +17,6 @@ public class Main {
     @Bean
     CommandLineRunner runner(LicensingEnforcerProps props, CoreApi api) {
         return args -> {
-
-            final var namespace = KubernetesUtils.getNamespace();
-
             System.out.println(props);
         };
     }
