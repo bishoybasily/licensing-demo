@@ -9,9 +9,8 @@ bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "contrib_rules_jvm", version = "0.29.0")
 bazel_dep(name = "aspect_bazel_lib", version = "2.21.1")
 bazel_dep(name = "container_structure_test", version = "1.19.1")
-bazel_dep(name = "googleapis", version = "0.0.0-20250826-a92cee39")
-bazel_dep(name = "protoc-gen-validate", version = "1.2.1.bcr.1")
-bazel_dep(name = "googleapis-java", version = "1.0.0")
+# Explicitly add googleapis BCR module to enable its extension for java/grpc proto rules
+bazel_dep(name = "googleapis", version = "0.0.0-20240819-fe8ba054a")
 
 # --- maven
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
@@ -98,6 +97,14 @@ maven.install(
     ],
 )
 use_repo(maven, "maven")
+
+# --- googleapis switched rules (enable java/grpc so grpc-java module can find rpc_java_proto)
+googleapis = use_extension("@googleapis//:extensions.bzl", "switched_rules")
+googleapis.use_languages(
+    java = True,
+    grpc = True,
+)
+use_repo(googleapis, "com_google_googleapis_imports")
 
 # --- oci
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
