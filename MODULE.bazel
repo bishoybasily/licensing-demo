@@ -58,6 +58,9 @@ maven.install(
         "io.projectreactor:reactor-core",
         "io.projectreactor:reactor-test",
 
+        # assertj
+        "org.assertj:assertj-core:3.27.4",
+
         # junit 5 engine
         "org.junit.jupiter:junit-jupiter-api",
         "org.junit.jupiter:junit-jupiter-engine",

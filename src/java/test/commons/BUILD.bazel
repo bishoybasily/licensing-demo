@@ -11,6 +11,9 @@ java_test_suite(
     ],
     deps = [
         "//src/java/main/commons:commons_library",
+        "@maven//:io_projectreactor_reactor_core",
+        "@maven//:io_projectreactor_reactor_test",
+        "@maven//:org_assertj_assertj_core",
         "@maven//:org_junit_jupiter_junit_jupiter_api",
     ],
 )
